@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'logreg_app/styles.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Exam</title>
+</head>
+<style>
+    thead, th, td, tr{
+        border: 3px solid black;
+        border-collapse: collapse;
+        padding: 3px;
+        font-size: 26px;
+    }
+</style>
+<body>
+    <h1>Welcome {{request.session.name}}</h1>
+    <a href={% url 'users:logout' %}>Cancel My Trip</a>
+    
+    <h2>Your Trips Scheduled:</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>Destination:</td>
+                <td>Travel Start Date:</td>
+                <td>Travel End Date:</td>
+                <td>Please creep on my plans:</td>
+                <td>I'm over this trip -- GOODBYE</td>
+            </tr>
+        </thead>
+        {% for trip in trips %}
+        <tr>
+            <td><a href="/info/{{ trip.id }}">{{ trip.destination }}</a></td>
+            <td>{{ trip.travel_start }}</td>
+            <td>{{ trip.travel_end }}</td>
+            <td>{{ trip.description }}</td> 
+            <td><a href="/leave/{{trip.id}}">Leave</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Other User's Travel Plans: </h2>
+    <table>
+        <thead>
+            <tr>
+                <td>Name:</td>
+                <td>Destination:</td>
+                <td>Travel Start Date:</td>
+                <td>Travel End Date:</td>
+                <td>Join?????</td>
+            </tr>
+        </thead>
+        {% for trip in other_trips %}
+        <tr>
+            <td>{{trip.created_by.name}}</td>
+            <td><a href="/info/{{ trip.id }}">{{ trip.destination }}</a></td>
+            <td>{{ trip.travel_start }}</td>
+            <td>{{ trip.travel_end }}</td>
+            <td><a href="/join/{{ trip.id }}">Join</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <br>
+    <a href="{% url 'users:add' %}"><button>START PLANNING YOUR DREAM VACATION HERE!!</button></a>
+</body>
+
+</html>

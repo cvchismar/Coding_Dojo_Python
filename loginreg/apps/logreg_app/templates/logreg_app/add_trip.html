@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Trip</title>
+</head>
+<body>
+    <h1>Planning Your Dream Vacation!!</h1>
+    <h4>No Payment Required!!!</h4>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif%}>{{ message }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    <form action="{% url 'users:create' %}" method="POST">
+        {% csrf_token%} 
+        <p>Destination:</p>
+        <input type="text" name="destination">
+        <p>Description:</p>
+        <input type="text" name="description">
+        <p>Travel Date From:</p>
+        <input type="date" name="travel_start">
+        <p>Travel Date To:</p>
+        <input type="date" name="travel_end">
+        <input type="submit" value="Start Tripping">
+    </form>
+    <br>
+    <br>
+    
+    <a href="{% url 'users:display' %}"><button>TAKE ME HOME</button></a>
+    <a href="{% url 'users:index' %}"><button>RUN AWAY!!!!</button></a>
+</body>
+</html>

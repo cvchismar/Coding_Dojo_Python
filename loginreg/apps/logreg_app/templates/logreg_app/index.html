@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'logreg_app/styles.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Welcome</h1>
+    {% if messages %}
+    <ul>
+        {% for error in messages %}
+           <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    
+    <div id="table1">
+        <h4>Register</h4>
+        <form action="/register" method="post">
+            {% csrf_token %}
+            Name:<input type="text" name="name" id=""><br>
+            Alias:<input type="text" name="alias" id=""><br>
+            Email:<input type="email" name="email" id=""><br>
+            Password:<input type="password" name="password" id=""><br>
+            <p>*Password should be at least 8 characters</p>
+            Confirm Password:<input type="password" name="confirm" id=""><br>
+            Date of Birth:<input type="date" name="date" id="cal">
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    <div id="table2">
+        <h4>Login</h4>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            Email: <input type="email" name="email" id=""> <br>
+            Password: <input type="password" name="password" id=""> <br>
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+</body>
+</html>

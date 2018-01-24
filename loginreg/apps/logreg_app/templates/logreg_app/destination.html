@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'exam_app/styles.css' %}" media="screen" title="no title"  charset="utf-8">
+    <title>Destination</title>
+</head>
+<body>
+    <h1>This is Why I, {{request.session.name}}, Picked {{trip.destination}} </h1>
+  
+    <p>Planned by: {{trip.created_by.name}}</p>
+    <p>This is what you may be joining: {{trip.description}}</p>
+    <p>I will be leaving on:{{trip.travel_start}}</p>
+    <p>I will be back home on: {{trip.travel_end}}</p>
+
+    <h1>PLEASE JOIN ME!!!! (I hate traveling alone)</h1>
+    {%for user in trip.travellers %}
+        <p>{{user.name}}</p>
+        {% endfor %}
+
+
+    <a href="{% url 'users:display' %}">Home</a>
+    <a href="{% url 'users:index' %}">Logout</a>
+</body>
+</html>
